@@ -1,3 +1,4 @@
+import { errorActions } from '../error/error.slice';
 import { api } from './api';
 
 export const cardsApi = api.injectEndpoints({
@@ -16,6 +17,12 @@ export const cardsApi = api.injectEndpoints({
             invalidatesTags: () => [{
                 type: 'Cards',
             }],
+            async onCacheEntryAdded(_, { dispatch }) {
+                try {
+                } catch (err) {
+                    dispatch(errorActions.setError(err))
+                }
+            }
         }),
         moveCardToEnd: builder.mutation({
             query: ({ dealer_product_id }) => ({
@@ -25,6 +32,12 @@ export const cardsApi = api.injectEndpoints({
             invalidatesTags: () => [{
                 type: 'Cards',
             }],
+            async onCacheEntryAdded(_, { }) {
+                try {
+                } catch (err) {
+                    dispatch(errorActions.setError(err))
+                }
+            }
         })
     })
 })
