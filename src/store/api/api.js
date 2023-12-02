@@ -5,7 +5,7 @@ export const api = createApi({
   reducerPath: 'api',
   tagTypes: ['Cards'],
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE_URL_API,
+    baseUrl: `${BASE_URL_API}/api/v1`,
   }),
   endpoints: () => ({})
 });

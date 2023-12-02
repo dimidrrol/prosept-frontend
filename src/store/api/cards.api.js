@@ -9,6 +9,9 @@ export const cardsApi = api.injectEndpoints({
                 type: 'Cards',
             }],
         }),
+        getStatistics: builder.query({
+            query: () => '/statistics',
+        }),
         deleteDealerCard: builder.mutation({
             query: ({ dealer_product_id }) => ({
                 url: `/matching/${dealer_product_id}`,
@@ -38,6 +41,21 @@ export const cardsApi = api.injectEndpoints({
                     dispatch(errorActions.setError(err))
                 }
             }
+        }),
+        postPair: builder.mutation({
+            query: ({ dealer_product_id }) => ({
+                url: `/matching/${dealer_product_id}`,
+                method: 'POST',
+            }),
+            invalidatesTags: () => [{
+                type: 'Cards',
+            }],
+            async onCacheEntryAdded(_, { }) {
+                try {
+                } catch (err) {
+                    dispatch(errorActions.setError(err))
+                }
+            }
         })
     })
 })
@@ -46,4 +64,6 @@ export const {
     useGetMatchesQuery,
     useDeleteDealerCardMutation,
     useMoveCardToEndMutation,
+    usePostPairMutation,
+    useGetStatisticsQuery,
 } = cardsApi;
