@@ -17,13 +17,15 @@ export const cardsApi = api.injectEndpoints({
                 url: `/matching/${dealer_product_id}`,
                 method: 'DELETE',
             }),
-            invalidatesTags: () => [{
+            invalidatesTags: (_, err) => !err ? [{
                 type: 'Cards',
-            }],
-            async onCacheEntryAdded(_, { dispatch }) {
+            }] : [],
+            async onQueryStarted(_, { queryFulfilled, dispatch }) {
                 try {
+                    await queryFulfilled;
                 } catch (err) {
-                    dispatch(errorActions.setError(err))
+                    const { error } = err;
+                    dispatch(errorActions.setError(error.status === 'FETCH_ERROR' ? error.error : error.data.detail));
                 }
             }
         }),
@@ -32,28 +34,33 @@ export const cardsApi = api.injectEndpoints({
                 url: `/matching/${dealer_product_id}`,
                 method: 'PATCH',
             }),
-            invalidatesTags: () => [{
+            invalidatesTags: (_, err) => !err ? [{
                 type: 'Cards',
-            }],
-            async onCacheEntryAdded(_, { }) {
+            }] : [],
+            async onQueryStarted(_, { queryFulfilled, dispatch }) {
                 try {
+                    await queryFulfilled;
                 } catch (err) {
-                    dispatch(errorActions.setError(err))
+                    const { error } = err;
+                    dispatch(errorActions.setError(error.status === 'FETCH_ERROR' ? error.error : error.data.detail));
                 }
             }
         }),
         postPair: builder.mutation({
-            query: ({ dealer_product_id }) => ({
+            query: ({ dealer_product_id, prosept_id }) => ({
                 url: `/matching/${dealer_product_id}`,
                 method: 'POST',
+                body: { prosept_id },
             }),
-            invalidatesTags: () => [{
+            invalidatesTags: (_, err) => !err ? [{
                 type: 'Cards',
-            }],
-            async onCacheEntryAdded(_, { }) {
+            }] : [],
+            async onQueryStarted(_, { queryFulfilled, dispatch }) {
                 try {
+                    await queryFulfilled;
                 } catch (err) {
-                    dispatch(errorActions.setError(err))
+                    const { error } = err;
+                    dispatch(errorActions.setError(error.status === 'FETCH_ERROR' ? error.error : error.data.detail));
                 }
             }
         })
