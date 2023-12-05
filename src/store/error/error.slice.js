@@ -7,11 +7,11 @@ export const errorSlice = createSlice({
     initialState,
     reducers: {
         setError: (state, { payload }) => {
-            state = payload;
+            return state = payload;
         },
         //при закрытии модалки с ошибкой очищаем стейт
         removeError: (state) => {
-            state = null;
+            return state = null;
         }
     }
 })
