@@ -1,0 +1,54 @@
+@import '../../variables.scss';
+
+.preloader {
+    display: none;
+    position: absolute;
+    top: 20%;
+    left: 45%;
+    width: 150px;
+    height: 150px;
+    margin: 30px auto;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: $blue-color;
+    animation: preloader-spin 2s linear infinite;
+
+    &_opened {
+        display: block;
+    }
+}
+
+.preloader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: $green-color;
+    animation: preloader-spin 3s linear infinite;
+}
+
+.preloader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: $blue-color;
+    animation: preloader-spin 1.5s linear infinite;
+}
+
+@keyframes preloader-spin {
+    0%   {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

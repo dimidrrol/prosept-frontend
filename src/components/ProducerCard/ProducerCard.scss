@@ -1,0 +1,26 @@
+@import '../../variables.scss';
+
+.producer-card {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    background-color: transparent;
+    cursor: pointer;
+    transition: border-bottom 0.2s linear;
+
+    &__item {
+        width: 30%;
+        margin: 0;
+        font-size: 18px;
+        font-weight: 400;
+        align-self: center;
+        text-align: center;
+    }
+}
+
+.producer-card:hover {
+    border-bottom: 3px solid $blue-color;
+}
