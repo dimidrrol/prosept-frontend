@@ -1,0 +1,23 @@
+.footer {
+    margin: auto auto 0;
+    width: 100%;
+    display: flex;
+    background-color: #D9D9D9;
+
+    &__box {
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+        margin: 15px auto;
+        font-size: 20px;
+        font-weight: 900;
+    }
+
+    &__copyright {
+        margin: 0;
+    }
+
+    &__team {
+        margin: 0;
+    }
+}

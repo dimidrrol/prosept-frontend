@@ -1,0 +1,116 @@
+@import '../../variables.scss';
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 496px;
+    width: 100%;
+    margin: 50px auto 0;
+    justify-content: space-between;
+    position: relative;
+
+    &__dealer-box {
+        width: 35%;
+        height: 400px;
+        border: 3px solid $green-color;
+        border-radius: 10px;
+    }
+
+    &__dealer-info {
+        list-style-type: decimal;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin: 15px 0 0;
+    }
+
+    &__dealer-item {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    &__producer-box {
+        width: 60%;
+        height: 400px;
+        border: 3px solid $blue-color;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    &__producer-contents {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    &__producer-item {
+        width: 30%;
+        align-self: center;
+        text-align: center;
+        margin: 0;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    &__producer-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    &__button-box {
+        width: 100%;
+        margin: 50px auto 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__button {
+        height: 40px;
+        padding: 0;
+        border: 3px solid transparent;
+        background-color: transparent;
+        cursor: pointer;
+        width: 30%;
+        font-size: 20px;
+        font-weight: 500;
+        border-radius: 10px;
+    }
+
+    &__button_type_yes {
+        background-color: $green-color;
+        color: white;
+        transition: background-color 0.2s linear;
+    }
+
+    &__button_type_yes:hover {
+        border-color: $green-color;
+        background-color: transparent;
+        color: black;
+    }
+
+    &__button_type_not {
+        color: white;
+        background: $gradient;
+        transition: border-color 0.2s linear;
+    }
+
+    &__button_type_not:hover {
+        border-color: red;
+    }
+
+    &__button_type_postpone {
+        color: white;
+        background-color: $blue-color;
+        transition: background-color 0.2s linear;
+    }
+
+    &__button_type_postpone:hover {
+        border-color: $blue-color;
+        color: black;
+        background-color: transparent;
+    }
+}
