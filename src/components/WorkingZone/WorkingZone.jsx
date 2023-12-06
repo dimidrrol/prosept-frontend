@@ -1,33 +1,42 @@
 import './WorkingZone.scss';
 import ProducerCard from '../ProducerCard/ProducerCard';
 import { useDeleteDealerCardMutation, useGetMatchesQuery, useMoveCardToEndMutation, usePostPairMutation } from '../../store/api/cards.api';
-import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import useActions from '../../hooks/useActions';
 
 export default function WorkingZone() {
     const { data } = useGetMatchesQuery(null, {});
-    const itemId = useSelector(state => state.itemId);
+    const { removeItemId } = useActions();
     const [postPair, { isSuccess: isSuccessPost }] = usePostPairMutation();
     const [deleteItem, { isSuccess: isSuccessDelete }] = useDeleteDealerCardMutation();
     const [moveToEnd, { isSuccess: isSuccessMove }] = useMoveCardToEndMutation();
-    const currentElement = itemId ? data.find(item => item.dealer_product.id === itemId) : data[0];
     const [proseptId, setProseptId] = useState('');
+    const itemId = useSelector(state => state.itemId);
+    const [currentElement, setCurrentElement] = useState(itemId ? data.find(item => +item.dealer_product.id === +itemId) : data[0]);
     const { dealer_product } = currentElement;
 
+    useEffect(() => {
+        setCurrentElement(itemId ? data.find(item => +item.dealer_product.id === +itemId) : data[0]);
+    }, [itemId])
+
     const handleChooseCard = (e) => {
-        setProseptId(e.target.closest('.producer-card').id)
+        setProseptId(e.target.closest('.producer-card').id);
     }
 
     const handlePostPair = () => {
-        postPair({ dealer_product_id: currentElement.dealer_product.id, prosept_id: proseptId })
+        postPair({ dealer_product_id: currentElement.dealer_product.id, prosept_id: proseptId });
+        removeItemId(itemId);
     }
 
     const handleDeleteItem = () => {
         deleteItem({ dealer_product_id: currentElement.dealer_product.id });
+        removeItemId(itemId);
     }
 
     const handleMoveToEnd = () => {
         moveToEnd({ dealer_product_id: currentElement.dealer_product.id });
+        removeItemId(itemId);
     }
 
     useEffect(() => {
@@ -46,16 +55,16 @@ export default function WorkingZone() {
         <div className='working-zone'>
             <div className='working-zone__dealer-box'>
                 <ul className='working-zone__dealer-info'>
-                    <li className='working-zone__dealer-item'>{dealer_product.dealer_name}</li>
+                    <li className='working-zone__dealer-item working-zone__dealer-item_dealer'>{dealer_product.dealer_name}</li>
                     <li className='working-zone__dealer-item'>{dealer_product.product_name}</li>
                     <li className='working-zone__dealer-item'>{dealer_product.price} руб.</li>
-                    <li className='working-zone__dealer-item'><a href={dealer_product.product_url} target='_blank'>Ссылка на товар</a></li>
+                    <li className='working-zone__dealer-item working-zone__dealer-item_link'><a className='working-zone__link' href={dealer_product.product_url} target='_blank' rel='noreferrer'>Ссылка на товар</a></li>
                 </ul>
             </div>
             <div className='working-zone__producer-box'>
                 <div className='working-zone__producer-contents'>
                     <h2 className='working-zone__producer-item'>Артикул</h2>
-                    <h2 className='working-zone__producer-item'>Название</h2>
+                    <h2 className='working-zone__producer-item working-zone__producer-item_name'>Название</h2>
                     <h2 className='working-zone__producer-item'>Цена</h2>
                 </div>
                 <ul className='working-zone__producer-cards'>

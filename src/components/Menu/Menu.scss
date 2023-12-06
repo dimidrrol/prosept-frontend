@@ -76,13 +76,16 @@
         outline: none;
     }
 
-    &__close-button {
-        width: 30px;
+    &__clean-button {
+        width: 10%;
         height: 30px;
         line-height: 30px;
+        font-size: 18px;
+        font-weight: 400;
         padding: 0;
         border: 0;
-        background-color: transparent;
+        background-color: rgb(207, 207, 207, 0.5);
+        border-radius: 10px;
         color: black;
         align-self: center;
         margin-right: 10px;
@@ -116,6 +119,17 @@
         transition: visibility 0.4s, opacity 0.4s linear;
     }
 
+    &__close-button {
+        position: fixed;
+        padding: 0;
+        border: 0;
+        margin: 0;
+        background-color: transparent;
+        cursor: pointer;
+        height: 20px;
+        width: 20px;
+    }
+
     &__list::-webkit-scrollbar {
         width: 10px;
         background-color: #f9f9fd;
@@ -137,9 +151,17 @@
         border: 0;
         background-color: transparent;
         cursor: pointer;
-        height: 22px;
+        height: 45px;
         font-size: 16px;
         font-weight: 500;
         line-height: 22px;
+
+        &:hover {
+            background-color: #D9D9D9;
+        }
+    }
+
+    &__list-item_chosen {
+        outline: 3px solid $blue-color;
     }
 }

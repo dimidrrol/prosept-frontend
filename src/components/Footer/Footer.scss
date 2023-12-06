@@ -1,6 +1,6 @@
 .footer {
     margin: auto auto 0;
-    width: 100%;
+    width: 100vw;
     display: flex;
     background-color: #D9D9D9;
 
@@ -10,7 +10,7 @@
         width: 90%;
         margin: 15px auto;
         font-size: 20px;
-        font-weight: 900;
+        font-weight: 500;
     }
 
     &__copyright {

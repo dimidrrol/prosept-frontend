@@ -12,6 +12,10 @@
     transition: border-bottom 0.2s linear;
     position: relative;
 
+    &:hover {
+        background-color: #D9D9D9;
+    }
+
     &_chosen {
         outline: 3px solid $blue-color;
     }
@@ -23,13 +27,11 @@
         font-weight: 400;
         align-self: center;
         text-align: center;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
     }
 
-    &:hover {
-        background-color: #D9D9D9;
+    &__item_name {
+        width: 60%;
+        font-size: 14px;
     }
 
     &__btn {

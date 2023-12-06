@@ -7,13 +7,13 @@ export const itemIdSlice = createSlice({
     name: 'itemId',
     initialState,
     reducers: {
-        setItemId: (state, { payload }) => {
-            state = payload;
+        setItemId: (state, { payload }) => {          
             localStorage.setItem(ITEM_ID, payload);
+            return state = payload;
         },
         removeItemId: (state) => {
-            state = null;
             localStorage.removeItem(ITEM_ID);
+            return state = null;
         }
     }
 })
