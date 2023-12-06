@@ -1,37 +1,46 @@
 import './Menu.scss';
-import ProducerCard from '../ProducerCard/ProducerCard';
-import Preloader from '../Preloader/Preloader';
+import triangle from '../../images/triangle.svg';
+import React from 'react';
 
 export default function Menu() {
+    const [searchValue, setSearchValue] = React.useState('');
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    function onChange(evt) {
+        const value = evt.target.value;
+        setSearchValue(value);
+    }
+
+    function handleOpenSearch() {
+        isOpen ? setIsOpen(false) : setIsOpen(true);
+    }
+
+    function closeList() {
+        setIsOpen(false);
+    }
+
     return (
         <div className='menu'>
-            <Preloader />
-            <div className='menu__dealer-box'>
-                <ul className='menu__dealer-info'>
-                    <li className='menu__dealer-item'>Имя диллера</li>
-                    <li className='menu__dealer-item'>Название товара</li>
-                    <li className='menu__dealer-item'>Цена товара</li>
-                    <li className='menu__dealer-item'><a href='#'>Ссылка на товар</a></li>
-                </ul>
+            <button onClick={handleOpenSearch} type='button' className={`menu__button ${isOpen ? 'menu__button_closed' : ''}`}>
+                Список карточек
+                <img className='menu__triangle' src={triangle} alt='Треугольник' />
+            </button>
+            <div className={`menu__input-box ${isOpen ? 'menu__input-box_opened' : ''}`}>
+                <input onChange={onChange} value={searchValue} type='text' placeholder='Поиск...' className='menu__search' />
+                <button onClick={closeList} type='button' className='menu__close-button'>&#10006;</button>
             </div>
-            <div className='menu__producer-box'>
-                <div className='menu__producer-contents'>
-                    <h2 className='menu__producer-item'>Артикул</h2>
-                    <h2 className='menu__producer-item'>Название</h2>
-                    <h2 className='menu__producer-item'>Цена</h2>
-                </div>
-                <div className='menu__producer-cards'>
-                    <ProducerCard />
-                    <ProducerCard />
-                    <ProducerCard />
-                    <ProducerCard />
-                    <ProducerCard />
-                </div>
-            </div>
-            <div className='menu__button-box'>
-                <button type='button' className='menu__button menu__button_type_yes'>Да</button>
-                <button type='button' className='menu__button menu__button_type_not'>Нет</button>
-                <button type='button' className='menu__button menu__button_type_postpone'>Отложить</button>
+            <div className={`menu__list ${isOpen ? 'menu__list_opened' : ''}`}>
+                <button className='menu__list-item'>Антисептик Просепт 1л.</button>
+                <button className='menu__list-item'>Антисептик Просепт 1л.</button>
+                <button className='menu__list-item'>Антисептик Просепт 1л.</button>
+                <button className='menu__list-item'>Антисептик Просепт 1л.</button>
+                <button className='menu__list-item'>Антисептик Просепт 1л.</button>
+                <button className='menu__list-item'>Антисептик Просепт 1л.</button>
+                <button className='menu__list-item'>Антисептик Просепт 1л.</button>
+                <button className='menu__list-item'>Антисептик Просепт 1л.</button>
+                <button className='menu__list-item'>Антисептик Просепт 1л.</button>
+                <button className='menu__list-item'>Антисептик Просепт 1л.</button>
+                <button className='menu__list-item'>Антисептик Просепт 1л.</button>
             </div>
         </div>
     )

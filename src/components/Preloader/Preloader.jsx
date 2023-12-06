@@ -2,6 +2,6 @@ import './Preloader.scss';
 
 export default function Preloader() {
     return (
-        <div className='preloader'></div>
+        <div className='preloader preloader_opened'></div>
     )
 }
