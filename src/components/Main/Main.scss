@@ -6,4 +6,13 @@
     width: 90%;
     margin: 0 auto;
     position: relative;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+
+    &__error {
+        margin: auto;
+        font-size: 24px;
+        font-weight: 900;
+    }
 }

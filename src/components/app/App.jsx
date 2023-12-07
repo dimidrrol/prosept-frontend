@@ -5,30 +5,15 @@ import Footer from '../Footer/Footer';
 import { useGetMatchesQuery } from '../../store/api/cards.api';
 import Preloader from '../Preloader/Preloader';
 import PopupError from '../PopupError/PopupError';
-import { useState } from 'react';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 function App() {
   const { isFetching } = useGetMatchesQuery(null, {});
-  const [isOpenPopup, setIsOpenPopup] = useState(false);
-
-  function handleClosePopup() {
-    setIsOpenPopup(false);
-    document.removeEventListener('keydown', handleEscClose);
-  }
-
-  function handleEscClose(evt) {
-    if (evt.key === 'Escape') {
-      handleClosePopup();
-    }
-  }
+  const error = useSelector(state => state.error)
 
   return (
     <div className='app'>
-      <PopupError
-        handleClosePopup={handleClosePopup}
-        isOpenPopup={isOpenPopup}
-        setIsOpenPopup={setIsOpenPopup}
-      />
+      {error && <PopupError />} 
       <Header />
       {isFetching ?
         <Preloader />

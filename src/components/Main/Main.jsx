@@ -14,7 +14,7 @@ export default function Main() {
                         <Menu />
                         <WorkingZone />
                     </> :
-                    <div>Произошла ошибка</div>
+                    <div className='main__error'>Произошла ошибка на сервере. Попробуйте позже.</div>
             }
         </main>
     )
