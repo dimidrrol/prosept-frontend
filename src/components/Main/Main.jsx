@@ -4,7 +4,7 @@ import { useGetMatchesQuery } from '../../store/api/cards.api';
 import Menu from '../Menu/Menu';
 
 export default function Main() {
-    const { data } = useGetMatchesQuery(null, {});    
+    const { data } = useGetMatchesQuery(null, {});
 
     return (
         <main className='main'>
