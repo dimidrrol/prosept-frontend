@@ -17,7 +17,9 @@ export default function Menu() {
     const debouncedSearchValue = useDebounce(searchValue, 300);
 
     useEffect(() => {
-        setFilteredDealer(data.map((item) => { return ({ product_name: item.dealer_product.product_name, id: item.dealer_product.id }) }).filter((card) => card.product_name.includes(searchValue)));
+        setFilteredDealer(data
+            .map((item) => { return ({ product_name: item.dealer_product.product_name, id: item.dealer_product.id }) })
+            .filter((card) => card.product_name.includes(searchValue)));
     }, [debouncedSearchValue, data]);
 
     function handleChooseItem(evt) {

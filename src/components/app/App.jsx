@@ -8,16 +8,16 @@ import PopupError from '../PopupError/PopupError';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 function App() {
-  const { isFetching } = useGetMatchesQuery(null, {});
+  const { data, isFetching } = useGetMatchesQuery(null, {});
   const error = useSelector(state => state.error)
 
   return (
     <div className='app'>
-      {error && <PopupError />} 
+      {error && <PopupError />}
       <Header />
       {isFetching ?
         <Preloader />
-        : <Main />
+        : <Main data={data} />
       }
       <Footer />
     </div>
