@@ -3,7 +3,6 @@ import { BASE_URL_API } from '../../utils/constants';
 
 export const api = createApi({
   reducerPath: 'api',
-  tagTypes: ['Cards'],
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL_API}/api/v1`,
   }),

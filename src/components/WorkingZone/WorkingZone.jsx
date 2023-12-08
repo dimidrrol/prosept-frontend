@@ -18,7 +18,7 @@ export default function WorkingZone() {
 
     useEffect(() => {
         setCurrentElement(itemId ? data.find(item => +item.dealer_product.id === +itemId) : data[0]);
-    }, [itemId])
+    }, [itemId, data])
 
     const handleChooseCard = (e) => {
         setProseptId(e.target.closest('.producer-card').id);

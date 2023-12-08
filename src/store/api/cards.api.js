@@ -5,9 +5,6 @@ export const cardsApi = api.injectEndpoints({
     endpoints: builder => ({
         getMatches: builder.query({
             query: () => '/matching',
-            providesTags: () => [{
-                type: 'Cards',
-            }],
         }),
         getStatistics: builder.query({
             query: () => '/statistics',
@@ -17,13 +14,17 @@ export const cardsApi = api.injectEndpoints({
                 url: `/matching/${dealer_product_id}`,
                 method: 'DELETE',
             }),
-            invalidatesTags: (_, err) => !err ? [{
-                type: 'Cards',
-            }] : [],
-            async onQueryStarted(_, { queryFulfilled, dispatch }) {
+            async onQueryStarted({ dealer_product_id }, { queryFulfilled, dispatch }) {
+                const patchResult = dispatch(
+                    cardsApi.util.updateQueryData('getMatches', null, (data) => {
+                        const index = data.findIndex(item => item.dealer_product.id === dealer_product_id);
+                        data.splice(index, 1);
+                    })
+                )
                 try {
                     await queryFulfilled;
                 } catch (err) {
+                    patchResult.undo();
                     const { error } = err;
                     dispatch(errorActions.setError(error.status === 'FETCH_ERROR' ? error.error : error.data.detail));
                 }
@@ -34,13 +35,18 @@ export const cardsApi = api.injectEndpoints({
                 url: `/matching/${dealer_product_id}`,
                 method: 'PATCH',
             }),
-            invalidatesTags: (_, err) => !err ? [{
-                type: 'Cards',
-            }] : [],
-            async onQueryStarted(_, { queryFulfilled, dispatch }) {
+            async onQueryStarted({ dealer_product_id }, { queryFulfilled, dispatch }) {
+                const patchResult = dispatch(
+                    cardsApi.util.updateQueryData('getMatches', null, (data) => {
+                        const index = data.findIndex(item => item.dealer_product.id === dealer_product_id);
+                        const thisCard = data.splice(index, 1);
+                        data.push(thisCard[0]);
+                    })
+                )
                 try {
                     await queryFulfilled;
                 } catch (err) {
+                    patchResult.undo();
                     const { error } = err;
                     dispatch(errorActions.setError(error.status === 'FETCH_ERROR' ? error.error : error.data.detail));
                 }
@@ -52,13 +58,17 @@ export const cardsApi = api.injectEndpoints({
                 method: 'POST',
                 body: { prosept_id },
             }),
-            invalidatesTags: (_, err) => !err ? [{
-                type: 'Cards',
-            }] : [],
-            async onQueryStarted(_, { queryFulfilled, dispatch }) {
+            async onQueryStarted({ dealer_product_id }, { queryFulfilled, dispatch }) {
+                const patchResult = dispatch(
+                    cardsApi.util.updateQueryData('getMatches', null, (data) => {
+                        const index = data.findIndex(item => item.dealer_product.id === dealer_product_id);
+                        data.splice(index, 1);
+                    })
+                )
                 try {
                     await queryFulfilled;
                 } catch (err) {
+                    patchResult.undo();
                     const { error } = err;
                     dispatch(errorActions.setError(error.status === 'FETCH_ERROR' ? error.error : error.data.detail));
                 }
