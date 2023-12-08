@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { useDebounce } from "@uidotdev/usehooks";
 
 export default function Menu() {
-    const { data, refetch } = useGetMatchesQuery(null, {});
+    const { data } = useGetMatchesQuery(null, {});
     const itemId = useSelector(state => state.itemId);
     const { setItemId } = useActions();
     const [searchValue, setSearchValue] = useState('');
@@ -19,7 +19,8 @@ export default function Menu() {
     useEffect(() => {
         setDealerId(itemId ? itemId : data[0].dealer_product.id)
         setFilteredDealer(data
-            .map((item) => { return ({ product_name: item.dealer_product.product_name, id: item.dealer_product.id })
+            .map((item) => {
+                return ({ product_name: item.dealer_product.product_name, id: item.dealer_product.id })
             })
             .filter((card) => card.product_name.includes(searchValue)));
     }, [debouncedSearchValue, data]);
@@ -27,7 +28,6 @@ export default function Menu() {
     function handleChooseItem(evt) {
         setDealerId(evt.target.closest('.menu__list-item').id);
         setItemId(evt.target.closest('.menu__list-item').id);
-        refetch();
     }
 
     function onChange(evt) {

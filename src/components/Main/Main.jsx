@@ -2,11 +2,11 @@ import './Main.scss';
 import WorkingZone from '../WorkingZone/WorkingZone';
 import Menu from '../Menu/Menu';
 
-export default function Main({ data } ) {
+export default function Main({ data }) {
     return (
         <main className='main'>
             {
-                data ?
+                (data && data.length > 0) ?
                     <>
                         <Menu />
                         <WorkingZone />
